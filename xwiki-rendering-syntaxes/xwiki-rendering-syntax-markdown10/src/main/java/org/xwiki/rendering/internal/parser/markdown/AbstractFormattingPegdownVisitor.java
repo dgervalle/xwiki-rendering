@@ -22,6 +22,7 @@ package org.xwiki.rendering.internal.parser.markdown;
 import java.util.Collections;
 
 import org.pegdown.ast.StrongEmphSuperNode;
+import org.pegdown.ast.StrikeNode;
 import org.xwiki.rendering.listener.Format;
 
 /**
@@ -40,5 +41,13 @@ public abstract class AbstractFormattingPegdownVisitor extends AbstractTextPegdo
         getListener().beginFormat(format, Collections.EMPTY_MAP);
         visitChildren(node);
         getListener().endFormat(format, Collections.EMPTY_MAP);
+    }
+
+    @Override
+    public void visit(StrikeNode node)
+    {
+        getListener().beginFormat(Format.STRIKEDOUT, Collections.EMPTY_MAP);
+        visitChildren(node);
+        getListener().endFormat(Format.STRIKEDOUT, Collections.EMPTY_MAP);
     }
 }
